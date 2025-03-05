@@ -4,12 +4,15 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("?apikey=YOUR_API_KEY")
-    suspend fun searchMovies(@Query("s") title: String): MovieResponse
+    @GET("/")
+    suspend fun searchMovies(
+        @Query("s") title: String,
+        @Query("apikey") apiKey: String = "ca9392d0" // Твой API-ключ
+    ): MovieResponse
 }
 
 data class MovieResponse(
-    val Search: List<MovieItem>
+    val Search: List<MovieItem>?
 )
 
 data class MovieItem(

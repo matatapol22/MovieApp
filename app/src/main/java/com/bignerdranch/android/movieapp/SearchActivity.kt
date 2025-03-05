@@ -11,9 +11,12 @@ import kotlinx.coroutines.withContext
 class SearchActivity : AppCompatActivity() {
     private val apiService = RetrofitClient.apiService
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
 
         val query = intent.getStringExtra("QUERY") ?: return
 

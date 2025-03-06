@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <Button
         android:id="@+id/btn_search"
         android:layout_width="wrap_content"

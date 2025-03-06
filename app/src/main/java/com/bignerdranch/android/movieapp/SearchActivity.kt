@@ -1,9 +1,11 @@
 package com.bignerdranch.android.movieapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.movieapp.network.MovieItem
 import com.bignerdranch.android.movieapp.network.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -45,6 +47,19 @@ class SearchActivity : AppCompatActivity() {
 
             } catch (e: Exception) {
                 e.printStackTrace()
+            }
+        }
+
+
+        adapter.listener = object : MovieAdapter.OnMovieClickListener {
+            override fun onMovieClick(movie: MovieItem) {
+                val intent = Intent(this@SearchActivity, MainActivity::class.java).apply {
+                    putExtra("MOVIE_TITLE", movie.Title)
+                    putExtra("MOVIE_YEAR", movie.Year)
+                    putExtra("MOVIE_POSTER", movie.Poster)
+                }
+                startActivity(intent)
+                finish() // Закрываем текущую активность после выбора фильма
             }
         }
     }

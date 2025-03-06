@@ -24,16 +24,25 @@ class SearchActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
+        val year = intent.getStringExtra("YEAR")
+
         val query = intent.getStringExtra("QUERY") ?: return
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = apiService.searchMovies(query)
+//                val response = apiService.searchMovies(query)
+
+                val response = if (year.isNullOrEmpty()) {
+                    apiService.searchMovies(query)
+                } else {
+                    apiService.searchMovies("$query $year")
+                }
                 withContext(Dispatchers.Main) {
                     if (response.Search != null) {
                         adapter.setData(response.Search)
                     }
                 }
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }

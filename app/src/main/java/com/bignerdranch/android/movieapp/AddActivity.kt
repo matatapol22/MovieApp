@@ -13,8 +13,11 @@ class AddActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btn_search).setOnClickListener {
             val query = findViewById<EditText>(R.id.et_search).text.toString()
+            val year = findViewById<EditText>(R.id.et_movie_year).text.toString()
             val intent = Intent(this, SearchActivity::class.java)
+
             intent.putExtra("QUERY", query)
+            intent.putExtra("YEAR", year)
             startActivity(intent)
         }
     }

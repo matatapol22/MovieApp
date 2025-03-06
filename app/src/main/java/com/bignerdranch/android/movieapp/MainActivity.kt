@@ -48,6 +48,12 @@ class MainActivity : AppCompatActivity() {
 
         adapter.setData(movieList) // Установка данных в адаптер
 
+        if (title != null && year != null && poster != null) {
+            val movie = MovieItem(title, year, poster)
+            movieList.add(movie) // Добавляем фильм в список
+            adapter.setData(movieList) // Обновляем адаптер со всем списком
+        }
+
         adapter.listener = object : MovieAdapter.OnMovieClickListener {
             override fun onMovieClick(movie: MovieItem) {
                 movieList.remove(movie) // Удаляем фильм из списка
@@ -56,11 +62,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if (title != null && year != null && poster != null) {
-            val movie = MovieItem(title, year, poster)
-            movieList.add(movie) // Добавляем фильм в список
-            adapter.setData(movieList) // Обновляем адаптер со всем списком
-        }
+
 
         findViewById<FloatingActionButton>(R.id.fab_add).setOnClickListener {
             startActivity(Intent(this, AddActivity::class.java))
